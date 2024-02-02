@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Target_lab</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <style>
+        section{
+            margin-top: 10%;
+            text-align: center;
+        }
+        table {
+            margin-top: 100px;
+        }
+    </style>
+<div class="container">
+    <section style="position: relative;">
+        <style>
+            .writecomment {
+                background-color: black;
+                padding: 50px;
+                border-radius: 10px;
+                position: absolute;
+                top: 25%;
+                left: 50%;
+                transform: translate(-50% , -50%);
+                display: none;
+            }
+        </style>
+        <div style="background-color: black; " class="writecomment w-50" >
+            <h3 style="color: white;" >write your comment here:</h3>
+            <input type="text" class="form-control ">
+            <button class="btn btn-outline-danger addc" style="margin-top: 15px;" id="radd"> Add comment </button>
+        </div>
+    <h1> components of Lab </h1>
+    <table id="components" class="table  w-100  table-dark  table-hover">
+        <thead>
+            <th> number </th>
+            <th>Type</th>
+            <th>Quantity</th>
+            <th>running</th>
+            <th>Damage</th>
+            <th>Comments</th>
+            <th>Add Comment</th>
+        </thead>
+      <tbody id="bodycom" >
+
+      </tbody>
+    </table>
+    <h1 style="margin-top: 50px;" > The Computers of lab </h1>
+    <table class="table  w-100  table-dark  table-hover" >
+        <thead>
+            <th> Number </th>
+            <th> Name of PC </th>
+            <th> staute to connect </th>
+            <th> Connect </th>
+        </thead>
+        <tr>
+            <td>1</td>
+            <td>pc1</td>
+            <td>NO</td>
+            <td> <button class="btn btn-outline-danger" > Connect </button> </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>pc2</td>
+            <td>Yes</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>pc3</td>
+            <td>Yes</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>pc4</td>
+            <td>No</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>pc5</td>
+            <td>Yes</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>pc6</td>
+            <td>NO</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>pc7</td>
+            <td>Yes</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>pc8</td>
+            <td>NO</td>
+            <td> <button class="btn btn-outline-danger"> Connect </button> </td>
+        </tr>
+    </table>
+</section>
+
+</div>
+
+    <script src="js/bootstrap.bundle.js" >
+       
+    </script>
+    <script>
+         var btns = document.getElementsByClassName("btn-primary");
+
+        let components = [
+        {
+            type:"computers" ,
+            Quantity:24 ,
+            running:20,
+            Damage:4 ,
+            comments:`
+                <li> pc1 damage </li> 
+                <li> pc2 damage </li> 
+            `,
+        }, 
+        {
+            type:"chairs" ,
+            Quantity:26 ,
+            running:23,
+            Damage:3 ,
+            comments: `  
+                <li> pc1 damage </li> 
+                <li> pla pla  </li> 
+                <li> pla pla </li> 
+           `,
+        }, 
+        {
+            type:"Keyboards" ,
+            Quantity:24 ,
+            running:23,
+            Damage:1 ,
+            comments: `  
+                <li> key damage </li> 
+                <li> pla pla </li> 
+            `,
+        } 
+        ]
+
+        var bodycom = document.getElementById("bodycom");
+        var cartona=``;
+        function display(){
+            for (i = 0; i < components.length; i++) {
+                cartona += `
+            <tr> 
+                <td> ${i+1} </td> 
+                <td> ${components[i].type} </td>
+                <td> ${components[i].Quantity} </td>
+                <td> ${components[i].running} </td>
+                <td> ${components[i].Damage} </td>
+                <td > <ul class="comment"> ${components[i].comments}  </ul> </td>
+                <td> <button onclick="add(${i})" class="btn btn-primary" >Add Comment</button> </td>
+            `   
+            }
+        }
+        display()
+        bodycom.innerHTML = cartona;
+
+            var writecomment = document.querySelector(".writecomment");
+            var input = document.querySelector(".form-control");
+            var addc = document.querySelector(".addc");
+            var comment = document.getElementsByClassName("comment");
+
+            addc.addEventListener("click", function () {
+                writecomment.style.display = "none";
+                var index = this.getAttribute("data-index");
+                comment[index].innerHTML += `<li> ${input.value} </li>`;
+                components[index].comments += `<li> ${input.value} </li>`;
+                input.value = "";
+            });
+
+            function add(index) {
+                writecomment.style.display = "block";
+                addc.setAttribute("data-index", index); 
+            }
+    </script>
+</body>
+</html>
